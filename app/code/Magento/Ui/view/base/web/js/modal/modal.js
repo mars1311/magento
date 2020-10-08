@@ -340,7 +340,7 @@ define([
          * Set z-index and margin for modal and overlay.
          */
         _setActive: function () {
-            var zIndex = this.modal.zIndex(),
+            var zIndex = this.modal.css("zIndex", ),
                 baseIndex = zIndex + this._getVisibleCount();
 
             if (this.modal.data('active')) {
@@ -349,9 +349,10 @@ define([
 
             this.modal.data('active', true);
 
-            this.overlay.zIndex(++baseIndex);
-            this.prevOverlayIndex = this.overlay.zIndex();
-            this.modal.zIndex(this.overlay.zIndex() + 1);
+            // this.overlay.zIndex(++baseIndex);
+            this.overlay.css("zIndex",++baseIndex);
+            this.prevOverlayIndex = this.overlay.css("zIndex",);
+            this.modal.css("zIndex",this.overlay.css("zIndex",) + 1);
 
             if (this._getVisibleSlideCount()) {
                 this.modal.css('marginLeft', this.options.modalLeftMargin * this._getVisibleSlideCount());

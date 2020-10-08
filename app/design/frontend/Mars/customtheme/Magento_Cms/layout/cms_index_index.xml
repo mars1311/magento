@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link src="Magento_Cms/js/popup.js"/>
+    </head>
+<body>
+    <referenceContainer name="main">
+        <block class="Magento\Cms\Block\Block" name="custom.block.title">
+            <arguments>
+                <argument name="block_id" xsi:type="string">custom_block_title</argument>
+            </arguments>
+        </block>
+        <block class="Magento\Framework\View\Element\Template" name="index.home" template="Magento_Cms::custom_popup.phtml">
+            <block name="form.subscribe" class="Magento\Newsletter\Block\Subscribe" template="Magento_Newsletter::subscribe.phtml"></block>
+        </block>
+    </referenceContainer>
+
+
+
+</body>
+</page>
+
+
+
