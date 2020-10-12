@@ -7,9 +7,12 @@
         <form data-bind="submit: navigateToNextStep" novalidate="novalidate">
             <div class="actions-toolbar">
                 <div class="primary">
-                    <textarea name="" id="" cols="30" rows="10" data-bind="textInput: customText"
+                    <textarea name=""  cols="30" rows="10" data-bind="textInput: customText"
                               placeholder="Leave your comment to order, please ( not required )">
                     </textarea>
+                    <textarea name=""   placeholder="Leave your adress to order, please ( not required )" cols="30" rows="10" data-bind="textInput: customValue"></textarea>
+
+
                     <button data-role="opc-continue" type="submit" class="button action continue primary">
                         <span><!-- ko i18n: 'Next'--><!-- /ko --></span>
                         <span>Go</span>
