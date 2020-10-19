@@ -1,0 +1,50 @@
+<?php /** @var \Magento\Customer\Block\Account\AuthorizationLink $block */ ?>
+
+<div class="metador-navbar-container-item search-toggle">
+    <span>
+        <?= $block->escapeHtml(__('Search')) ?>
+    </span>
+</div>
+<div class="metador-navbar-container-item">
+            <?php if ($block->isLoggedIn()) : ?>
+                <a class="header-link-toggle">
+                    <?= $block->escapeHtml(__('Account')) ?>
+                </a>
+            <?php else: ?>
+             <a class="account-link" href="<?php echo $block->getUrl('customer/account/login'); ?>">
+                 <?= $block->escapeHtml(__('Account')) ?>
+              </a>
+            <?php endif; ?>
+</div>
+<div class="metador-navbar-container-item shopping-cart-toggle">
+    <span> <?= $block->escapeHtml(__('Cart')) ?> </span>
+    <p class="counter" data-bind="scope:'minicart'">
+        <span class="count">
+            <!-- ko if: getCartParam('summary_count')-->
+            <span data-bind="text: getCartParam('summary_count')"></span>
+            <!-- /ko -->
+
+            <!-- ko ifnot: getCartParam('summary_count')-->
+            <span>0</span>
+            <!-- /ko -->
+        </span>
+    </p>
+</div>
+
+<script type="text/x-magento-init">
+  {
+    "*": {
+      "Magento_Ui/js/core/app": {
+        "components": {
+          "customer": {
+            "component": "Magento_Customer/js/view/customer"
+          },
+          "minicart": {
+            "component": "Magento_Checkout/js/view/minicart"
+          }
+        }
+      },
+      "toggleNavbar": {}
+    }
+  }
+</script>
