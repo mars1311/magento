@@ -1,0 +1,49 @@
+<div class="category-items-container" data-bind="scope:'items-category-scope'">
+    <form action="#" method="post" class="category-form">
+        <label for="categoryId">
+            <span data-bind="i18n: 'Write category id!'"></span>
+        </label>
+        <br>
+        <input type="text" class="category-input" id="categoryId" name="categoryId">
+        <button class="set-category-btn" type="button" id="setCategoryId" data-bind="click:getCategoryId">
+            <span data-bind="i18n: 'Get slider!'"></span>
+        </button>
+    </form>
+<!--    <button class="category-shoes-btn"-->
+<!--            type="button"-->
+<!--            data-bind="click:getShoesSlider" >-->
+<!--        <span data-bind="i18n: 'Get slider with shoes!'"></span>-->
+<!--    </button>-->
+<!--    <button class="category-cups-btn"-->
+<!--            type="button"-->
+<!--            data-bind="click:getCupsSlider">-->
+<!--        <span data-bind="i18n: 'Get slider with cups!'"></span>-->
+<!--    </button>-->
+    <!-- ko if: productsImages().length > 0 -->
+
+
+    <div data-bind=" foreach: productsImages(), mageInit: {'itemsSlider':{'sliderContainerSelector': '.products-slider'}}" class="products-slider">
+            <div>
+                 <img class="slider-image" data-bind="attr:{src: image.url, alt:name}" />
+            </div>
+        </div>
+    <!-- /ko -->
+
+    <!-- ko if: showNotification  -->
+    <p> Unfortunately, there are no products in this category. </p>
+    <!-- /ko -->
+
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                  "items-category-scope": {
+                    "component": "Magento_Cms/js/items-category-output"
+               }
+            }
+          }
+        }
+    }
+</script>
