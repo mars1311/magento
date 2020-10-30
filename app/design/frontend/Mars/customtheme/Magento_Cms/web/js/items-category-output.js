@@ -10,51 +10,65 @@ define([
 
         return Component.extend({
             productsImages: ko.observableArray(),
-            categoryId: ko.observable(''),
+
+            itemName: ko.observable(''),
+            itemQty: ko.observable(''),
+
             showNotification: ko.observable(false),
-            showLoading: ko.observable(false),
             initialize: function () {
                 this._super();
             },
-            getCategoryId: function () {
+            getItems: function () {
                 var self = this;
-                self.showLoading(true)
                 $('body').trigger('processStart');
 
-                var categoryValue = document.getElementById("categoryId").value;
-                self.categoryId(categoryValue)
+                var itemName = document.getElementById("itemNameId").value;
+                self.itemName(itemName)
 
-                self.getProducts(self.categoryId())
+                var itemQty = document.getElementById("itemQtyId").value;
+                self.itemQty(itemQty)
+
+                self.getProducts(self.itemName(), self.itemQty())
             },
-            getShoesSlider: function () {
-                var self = this;
-                self.getProducts(self.itemsCategories.shoes)
-            },
-            getCupsSlider: function () {
-                var self = this;
-                self.getProducts(self.itemsCategories.cups)
-            },
-            getProducts: function (productsID) {
+
+            getProducts: function (productName, productQuantity) {
+                console.log(productName, productQuantity)
                 var self = this;
                 var url = urlBuilder.build("graphql");
                 var headers = {
                     'Authorization':'bearer s2pzubm2fb4x3axto8egns760xawxzct',
                     'access-control-allow-origin':'*'
                 };
-                var query = `query { products( filter:{ category_id:{ eq:"${productsID}" } } ){ items { name sku image {url label} } } } `;
-//change parametres, how to send variables query
-// find all items by name and set quantity
-// on custom step create input
                 $.ajax({
                     type: 'post',
                     url,
                     contentType: "application/json",
                     headers,
-                    data: JSON.stringify({"query": query}),
-                    success: function(data){
+                    data: JSON.stringify({
+                        query: `query ($productName: String!) {
+                                  products(
+                                    filter: { name: {match: $productName}}
+                                  )
+                                  {
+                                    items {
+                                    name
+                                    sku
+                                        image {
+                                        url
+                                        label
+                                       }
+                                     }
+                                    }
+                                  }`,
+                        variables: {
+                            "productName": productName
+                        }
+                    }),
+                        success: function(data){
+                        var slicedData = data.data.products.items.slice(0, productQuantity);
+                        console.log(slicedData)
                         self.productsImages([])
-                        self.productsImages(data.data.products.items)
-                        self.showLoading(false)
+                        self.productsImages(slicedData)
                         $('body').trigger('processStop');
 
                         if(data.data.products.items.length === 0) {

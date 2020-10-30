@@ -1,27 +1,24 @@
-<div class="category-items-container" data-bind="scope:'items-category-scope'">
-    <form action="#" method="post" class="category-form">
-        <label for="categoryId">
-            <span data-bind="i18n: 'Write category id!'"></span>
-        </label>
-        <br>
-        <input type="text" class="category-input" id="categoryId" name="categoryId">
-        <button class="set-category-btn" type="button" id="setCategoryId" data-bind="click:getCategoryId">
-            <span data-bind="i18n: 'Get slider!'"></span>
-        </button>
-    </form>
-<!--    <button class="category-shoes-btn"-->
-<!--            type="button"-->
-<!--            data-bind="click:getShoesSlider" >-->
-<!--        <span data-bind="i18n: 'Get slider with shoes!'"></span>-->
-<!--    </button>-->
-<!--    <button class="category-cups-btn"-->
-<!--            type="button"-->
-<!--            data-bind="click:getCupsSlider">-->
-<!--        <span data-bind="i18n: 'Get slider with cups!'"></span>-->
-<!--    </button>-->
+<div class="items-container" data-bind="scope:'items-scope'">
+    <div class="items-form-container">
+        <form action="#" method="post" class="category-form">
+            <label for="itemName">
+                <span data-bind="i18n: 'Write item name!'"></span>
+            </label>
+            <input type="text" class="item-input" id="itemNameId" name="itemName">
+
+            <label for="itemQty">
+                <span data-bind="i18n: 'Write item quantity!'"></span>
+            </label>
+            <input type="text" class="item-input" id="itemQtyId" name="itemQty">
+
+            <button class="get-items-btn" type="button" id="getItemsBtn" data-bind="click:getItems">
+                <span data-bind="i18n: 'Get slider!'"></span>
+            </button>
+        </form>
+
+    </div>
+
     <!-- ko if: productsImages().length > 0 -->
-
-
     <div data-bind=" foreach: productsImages(), mageInit: {'itemsSlider':{'sliderContainerSelector': '.products-slider'}}" class="products-slider">
             <div>
                  <img class="slider-image" data-bind="attr:{src: image.url, alt:name}" />
@@ -30,7 +27,7 @@
     <!-- /ko -->
 
     <!-- ko if: showNotification  -->
-    <p> Unfortunately, there are no products in this category. </p>
+    <p> Unfortunately, there are no products match to this name. </p>
     <!-- /ko -->
 
 </div>
@@ -39,7 +36,7 @@
         "*": {
             "Magento_Ui/js/core/app": {
                 "components": {
-                  "items-category-scope": {
+                  "items-scope": {
                     "component": "Magento_Cms/js/items-category-output"
                }
             }
