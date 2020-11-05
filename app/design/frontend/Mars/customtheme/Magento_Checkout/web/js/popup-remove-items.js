@@ -14,7 +14,7 @@ define([
         },
 
         clearShoppingCart: function() {
-            var url = urlBuilder.build("update-items/page/clearShoppingCart");
+            var url = urlBuilder.build("update-cart/page/clearShoppingCart");
             $.ajax({
                 url: url,
                 type: 'POST',
