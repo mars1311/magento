@@ -14,7 +14,7 @@ define([
         },
 
         clearShoppingCart: function() {
-            var url = urlBuilder.build("update-cart/page/clearShoppingCart");
+            var url = urlBuilder.build("removeitems/page/clearShoppingCart");
             $.ajax({
                 url: url,
                 type: 'POST',
@@ -34,14 +34,14 @@ define([
                 class: 'confirm modal-btn',
                 click: function () {
                     self.clearShoppingCart();
-                    self.closeModal();
+                    this.closeModal();
                 }
             },
                 refuseModalBtn =  {
                 text: $.mage.__('No'),
                 class: 'refuse modal-btn',
                 click: function () {
-                    self.closeModal();
+                    this.closeModal();
                 }
             },
                 options = {
@@ -52,8 +52,8 @@ define([
                 buttons: [confirmModalBtn, refuseModalBtn]
             };
 
-            modal(options, document.querySelector('#popup-modal'));
-            document.querySelector('#popup-modal').modal('openModal');
+            modal(options, $('#popup-modal'));
+            $('#popup-modal').modal('openModal');
         },
     });
 });
